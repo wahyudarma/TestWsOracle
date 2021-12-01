@@ -1,0 +1,17 @@
+create table TBL_EMPLOYEE
+(
+    ID      NUMBER not null
+        constraint TBL_EMPLOYEE_PK
+            primary key,
+    NAME    VARCHAR2(100),
+    AGE     NUMBER,
+    ID_DEPT NUMBER
+        constraint TBL_EMPLOYEE_TBL_DEPARTMENT_ID_DEPT_FK
+            references TBL_DEPARTMENT
+)
+/
+
+INSERT INTO WAHYU.TBL_EMPLOYEE (ID, NAME, AGE, ID_DEPT) VALUES (1, 'wahyu', 22, 1);
+INSERT INTO WAHYU.TBL_EMPLOYEE (ID, NAME, AGE, ID_DEPT) VALUES (2, 'diyos', 24, 2);
+INSERT INTO WAHYU.TBL_EMPLOYEE (ID, NAME, AGE, ID_DEPT) VALUES (4, 'victor bayu', 24, 21);
+INSERT INTO WAHYU.TBL_EMPLOYEE (ID, NAME, AGE, ID_DEPT) VALUES (3, 'diyos el', 23, 1);
