@@ -74,7 +74,7 @@ BEGIN
     PROCEDURE update_employee(
         fn_name TBL_EMPLOYEE.NAME%TYPE,
         fn_age TBL_EMPLOYEE.AGE%TYPE,
-        fn_id_dept TBL_EMPLOYEE.AGE%TYPE,
+        fn_id_dept TBL_EMPLOYEE.ID_DEPT%TYPE,
         fn_id TBL_EMPLOYEE.ID%TYPE
     ) IS
 
