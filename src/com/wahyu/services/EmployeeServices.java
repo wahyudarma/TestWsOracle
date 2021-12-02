@@ -105,7 +105,7 @@ public class EmployeeServices implements IEmployee
         Pojo emp = new Pojo();
         Employee employeeList = new Employee();
         emp.setListEmployee(new ArrayList<Employee>());
-        ResultSet rs = DbHelper.SelectQuery("SELECT * FROM TBL_EMPLOYEE ORDER BY id");
+        ResultSet rs = DbHelper.SelectQuery("SELECT e.id, e.name, e.age, e.id_dept, d.name_dept FROM TBL_EMPLOYEE E INNER JOIN TBL_DEPARTMENT D ON D.id_dept = E.id_dept ORDER BY id");
         try {
             while (rs.next())
             {
@@ -113,7 +113,7 @@ public class EmployeeServices implements IEmployee
 
                 Department d = new Department();
                 d.setId_dept(rs.getInt("id_dept"));
-//                d.setName_dept(rs.getString("name_dept"));
+                d.setName_dept(rs.getString("name_dept"));
 
                 e.setDepartment(d);
                 e.setId(rs.getInt("id"));
