@@ -31,6 +31,7 @@ public interface IEmployee
     @WebMethod
     public Pojo getAllEmployee();
 
+
     @WebMethod
     public Pojo getAllDepartment();
 
