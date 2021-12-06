@@ -1,20 +1,20 @@
-create PACKAGE department_pkg
+create or replace PACKAGE department_pkg
 AS
---     Insert
-        PROCEDURE add_department(
-        fn_name_dept TBL_DEPARTMENT.NAME_DEPT%TYPE
+    --     Insert
+    PROCEDURE add_department(
+        fn_name_dept IN TBL_DEPARTMENT.NAME_DEPT%TYPE
     );
 --     Get By ID
-   PROCEDURE cari_department (fn_id_dept TBL_DEPARTMENT.ID_DEPT%TYPE);
+    PROCEDURE cari_department (fn_id_dept IN TBL_DEPARTMENT.ID_DEPT%TYPE, fn_tbldepartment OUT SYS_REFCURSOR);
 --     Get All
-   PROCEDURE list_department;
+    PROCEDURE list_department (fn_tbldepartment OUT SYS_REFCURSOR);
 --     Update
     PROCEDURE update_department (
-    fn_name_dept TBL_DEPARTMENT.NAME_DEPT%TYPE,
-    fn_id_dept TBL_DEPARTMENT.ID_DEPT%TYPE
+        fn_name_dept IN TBL_DEPARTMENT.NAME_DEPT%TYPE,
+        fn_id_dept IN TBL_DEPARTMENT.ID_DEPT%TYPE
     );
 --     Delete
-    PROCEDURE delete_department(fn_id_dept TBL_DEPARTMENT.ID_DEPT%TYPE);
+    PROCEDURE delete_department(fn_id_dept IN TBL_DEPARTMENT.ID_DEPT%TYPE);
 END department_pkg;
 /
 
