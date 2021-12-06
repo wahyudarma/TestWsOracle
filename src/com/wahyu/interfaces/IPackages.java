@@ -12,25 +12,32 @@ import javax.jws.soap.SOAPBinding;
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public interface IPackages
 {
-    // Employees
-
-    // Department
     //  Insert
     @WebMethod
     public void insertPackageDepartment(Department department);
+
+    @WebMethod
+    public void insertPackageEmployee(Employee employee);
 
     //  Get All
     @WebMethod
     public Pojo getAllPackageDepartment();
 
-    //    DELETE
+    @WebMethod
+    public Pojo getAllPackageEmployee();
 
+    //    DELETE
     @WebMethod
     public void deletePackageDepartment(int id_dept);
 
-    //    UPDATE
+    @WebMethod
+    public void deletePackageEmployee(int id);
 
+    //    UPDATE
     @WebMethod
     public void updatePackageDepartment(Department department);
+
+    @WebMethod
+    public void updatePackageEmployee(Employee employee);
 
 }

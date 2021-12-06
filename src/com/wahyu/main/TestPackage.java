@@ -14,7 +14,7 @@ public class TestPackage
         String jbdcUrl = "jdbc:oracle:thin:@localhost:1521:orcl";
         String username = "wahyu";
         String password = "wahyu";
-        String sql = "{ call department_pkg.cari_department('1', ?) }";
+        String sql = "{ call employees_pkg.list_employees(?) }";
 
 //        String sql = "SELECT ID FROM TBL_EMPLOYEE";
 
@@ -22,20 +22,20 @@ public class TestPackage
              CallableStatement cs = conn.prepareCall(sql);
         )
         {
-            cs.setInt(1, 42);
+//            cs.setInt(1, 1);
 //            cs.registerOutParameter(1, OracleTypes.INTEGER);
-            cs.registerOutParameter(2, OracleTypes.CURSOR);
-            cs.executeUpdate();
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.execute();
 
-            ResultSet rs = (ResultSet) cs.getObject(2);
+            ResultSet rs = (ResultSet) cs.getObject(1);
 //            System.out.println("ID = " + rs.getInt(1));
             while (rs.next()) {
-                Department d = new Department();
-                d.setId_dept(rs.getInt("id_dept"));
-                d.setName_dept(rs.getString("name_dept"));
+                Employee d = new Employee();
+                d.setId(rs.getInt("id"));
+                d.setName(rs.getString("name"));
 
-                System.out.println("id      : " + d.getId_dept());
-                System.out.println("name    : " + d.getName_dept());
+                System.out.println("id      : " + d.getId());
+                System.out.println("name    : " + d.getName());
             }
         }
         catch (SQLException e)

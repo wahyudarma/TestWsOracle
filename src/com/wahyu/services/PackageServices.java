@@ -31,6 +31,24 @@ public class PackageServices implements IPackages
         }
     }
 
+    @Override
+    public void insertPackageEmployee(Employee employee) {
+        try
+        {
+            String sql = "{ call employees_pkg.add_employees('" + employee.getId() + "', " +
+                                                             "'" + employee.getName() + "', " +
+                                                             "'" + employee.getAge() + "', " +
+                                                             "'" + employee.getDepartment().getId_dept() + "'" +
+                                                             ")}";
+
+            DbHelper.insertPackageGetId(sql);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
 
     // Select All
     @Override
@@ -54,12 +72,50 @@ public class PackageServices implements IPackages
         }
         return dept;
     }
+
+    @Override
+    public Pojo getAllPackageEmployee() {
+        Pojo emp = new Pojo();
+        Employee employeeList = new Employee();
+        emp.setListEmployee(new ArrayList<Employee>());
+        ResultSet rs = DbHelper.selectPackage("{ call employees_pkg.list_employees(?) }");
+        try {
+            while (rs.next())
+            {
+                Employee e = new Employee();
+
+                Department d = new Department();
+                d.setId_dept(rs.getInt("id_dept"));
+                d.setName_dept(rs.getString("name_dept"));
+
+                e.setDepartment(d);
+                e.setId(rs.getInt("id"));
+                e.setName(rs.getString("name"));
+                e.setAge(rs.getInt("age"));
+
+                emp.getListEmployee().add(e);
+            }
+        }
+        catch (Exception t)
+        {
+            t.printStackTrace();
+        }
+        return emp;
+    }
+
     // Delete
     @Override
     public void deletePackageDepartment(int id_dept) {
         String sql = "{ call department_pkg.delete_department("+ id_dept + ") }";
         DbHelper.executePackage(sql);
     }
+
+    @Override
+    public void deletePackageEmployee(int id) {
+        String sql = "{ call employees_pkg.delete_employee("+ id + ") }";
+        DbHelper.executePackage(sql);
+    }
+
     // Update
     @Override
     public void updatePackageDepartment(Department department)
@@ -67,6 +123,22 @@ public class PackageServices implements IPackages
         try
         {
             String sql = "{ call department_pkg.update_department('"+ department.getName_dept()+ "','" + department.getId_dept() + "') }";
+            DbHelper.executePackage(sql);
+        }
+        catch (Exception t)
+        {
+            t.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updatePackageEmployee(Employee employee) {
+        try
+        {
+            String sql = "{ call employees_pkg.update_employee('" + employee.getName() + "', " +
+                                                              "'" + employee.getAge() + "', " +
+                                                              "'" + employee.getDepartment().getId_dept() + "', " +
+                                                              "'" + employee.getId() + "') }";
             DbHelper.executePackage(sql);
         }
         catch (Exception t)
