@@ -8,7 +8,7 @@ AS
         fn_id_dept IN TBL_EMPLOYEE.ID_DEPT%TYPE
     );
 --     Get By ID
-    PROCEDURE cari_employees (fn_id IN TBL_EMPLOYEE.ID%TYPE, fn_tblemployee OUT SYS_REFCURSOR);
+    PROCEDURE search_employee_by_id (fn_id IN TBL_EMPLOYEE.ID%TYPE, fn_tblemployee OUT SYS_REFCURSOR);
 --     Get All
     PROCEDURE list_employees (fn_tblemployee OUT SYS_REFCURSOR);
 --     Update

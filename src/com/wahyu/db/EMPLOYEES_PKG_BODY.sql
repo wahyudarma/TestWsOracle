@@ -14,15 +14,15 @@ AS
         COMMIT;
     END add_employees;
 --     Get By ID
-    PROCEDURE cari_employees(fn_id IN TBL_EMPLOYEE.ID%TYPE, fn_tblemployee OUT SYS_REFCURSOR)
+    PROCEDURE search_employee_by_id(fn_id IN TBL_EMPLOYEE.ID%TYPE, fn_tblemployee OUT SYS_REFCURSOR)
     AS
     BEGIN
         OPEN fn_tblemployee FOR
-            SELECT e.name, e.age, d.id_dept, d.name_dept
+            SELECT e.ID, e.name, e.age, d.id_dept, d.name_dept
             FROM TBL_EMPLOYEE E
                      INNER JOIN TBL_DEPARTMENT D on D.ID_DEPT = E.ID_DEPT
             WHERE ID = fn_id;
-    END cari_employees;
+    END search_employee_by_id;
 
 --      Get All
     PROCEDURE list_employees(fn_tblemployee OUT SYS_REFCURSOR)

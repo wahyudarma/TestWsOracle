@@ -5,7 +5,10 @@ AS
         fn_name_dept IN TBL_DEPARTMENT.NAME_DEPT%TYPE
     );
 --     Get By ID
-    PROCEDURE cari_department (fn_id_dept IN TBL_DEPARTMENT.ID_DEPT%TYPE, fn_tbldepartment OUT SYS_REFCURSOR);
+    PROCEDURE search_department_by_id(
+        fn_id_dept IN TBL_DEPARTMENT.ID_DEPT%TYPE,
+        fn_tbldepartment OUT SYS_REFCURSOR
+    );
 --     Get All
     PROCEDURE list_department (fn_tbldepartment OUT SYS_REFCURSOR);
 --     Update

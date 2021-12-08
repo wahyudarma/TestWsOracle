@@ -10,7 +10,7 @@ AS
         COMMIT;
     END add_department;
 --     Get By ID
-    PROCEDURE cari_department(
+    PROCEDURE search_department_by_id(
         fn_id_dept IN TBL_DEPARTMENT.ID_DEPT%TYPE,
         fn_tbldepartment OUT SYS_REFCURSOR
     )
@@ -20,7 +20,7 @@ AS
             SELECT ID_DEPT, NAME_DEPT
             FROM TBL_DEPARTMENT
             WHERE ID_DEPT = fn_id_dept;
-    END cari_department;
+    END search_department_by_id;
 
 --      Get All
     PROCEDURE list_department(
