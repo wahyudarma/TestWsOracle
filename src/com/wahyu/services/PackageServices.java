@@ -5,8 +5,9 @@ import com.wahyu.model.Department;
 import com.wahyu.model.Employee;
 import com.wahyu.interfaces.IPackages;
 import com.wahyu.pojo.Pojo;
+import oracle.jdbc.OracleTypes;
 
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.*;
 
 import javax.jws.WebService;
@@ -94,6 +95,52 @@ public class PackageServices implements IPackages
                 e.setAge(rs.getInt("age"));
 
                 emp.getListEmployee().add(e);
+            }
+        }
+        catch (Exception t)
+        {
+            t.printStackTrace();
+        }
+        return emp;
+    }
+    // Get Data By Id
+    @Override
+    public Department selectPackageDepartment(int id_dept) {
+        Department dept = new Department();
+        ResultSet rs = DbHelper.selectPackageById("{ call DEPARTMENT_PKG.search_department_by_id(?,?) }", id_dept);
+        try {
+            while (rs.next())
+            {
+                dept = new Department();
+
+                dept.setId_dept(rs.getInt("id_dept"));
+                dept.setName_dept(rs.getString("name_dept"));
+
+            }
+        }
+        catch (Exception t)
+        {
+            t.printStackTrace();
+        }
+        return dept;
+    }
+
+    @Override
+    public Employee selectPackageEmployee(int id) {
+        Employee emp = new Employee();
+        ResultSet rs = DbHelper.selectPackageById("{ call EMPLOYEES_PKG.search_employee_by_id(?,?) }", id);
+        try {
+            while (rs.next())
+            {
+                emp = new Employee();
+                Department dept = new Department();
+
+                dept.setId_dept(rs.getInt("id_dept"));
+                dept.setName_dept(rs.getString("name_dept"));
+                emp.setDepartment(dept);
+                emp.setId(rs.getInt("id"));
+                emp.setName(rs.getString("name"));
+                emp.setAge(rs.getInt("age"));
             }
         }
         catch (Exception t)

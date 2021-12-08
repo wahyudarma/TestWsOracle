@@ -1,5 +1,6 @@
 package com.wahyu.connection;
 
+import com.wahyu.model.Department;
 import jdk.nashorn.internal.codegen.CompilerConstants;
 import oracle.jdbc.OracleDriver;
 import oracle.jdbc.OracleTypes;
@@ -87,15 +88,14 @@ public class DbHelper
         }
         return rs;
     }
-    public static ResultSet selectPackageById(String query)
+    public static ResultSet selectPackageById(String query, int id)
     {
         bukaKoneksi();
 
         ResultSet rs = null;
         try {
             CallableStatement cs = koneksi.prepareCall(query);
-//            cs.setInt(1, 1);
-            cs.registerOutParameter(1, OracleTypes.INTEGER);
+            cs.setInt(1, id);
             cs.registerOutParameter(2, OracleTypes.CURSOR);
             cs.execute();
             rs = (ResultSet) cs.getObject(2);

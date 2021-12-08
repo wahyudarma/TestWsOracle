@@ -26,6 +26,13 @@ public interface IPackages
     @WebMethod
     public Pojo getAllPackageEmployee();
 
+    // Get Data By Id
+    @WebMethod
+    public Department selectPackageDepartment(int id_dept);
+
+    @WebMethod
+    public Employee selectPackageEmployee(int id);
+
     //    DELETE
     @WebMethod
     public void deletePackageDepartment(int id_dept);
